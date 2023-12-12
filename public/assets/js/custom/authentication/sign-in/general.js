@@ -80,14 +80,10 @@ var KTSigninGeneral = function () {
                             }
                         }).then(function (result) {
                             if (result.isConfirmed) {
-                                form.querySelector('[name="email"]').value = "";
-                                form.querySelector('[name="password"]').value = "";
-
+                                
                                 //form.submit(); // submit form
-                                var redirectUrl = form.getAttribute('data-kt-redirect-url');
-                                if (redirectUrl) {
-                                    location.href = redirectUrl;
-                                }
+                                var redirectUrl = '/';
+                                location.href = redirectUrl;
                             }
                         });
                     }, 2000);
@@ -123,7 +119,13 @@ var KTSigninGeneral = function () {
                     submitButton.disabled = true;
 
                     // Check axios library docs: https://axios-http.com/docs/intro
-                    axios.post(submitButton.closest('form').getAttribute('action'), new FormData(form)).then(function (response) {
+                    let email = document.querySelector('[name="email"]').value;
+                    let password = document.querySelector('[name="password"]').value;
+                    let formdata = new FormData();
+                    formdata.append("email", email);
+                    formdata.append("password", password);
+                    
+                    axios.post(`${baseUrlApi}/api/login`, formdata).then(function (response) {
                         if (response) {
                             form.reset();
 
@@ -138,10 +140,12 @@ var KTSigninGeneral = function () {
                                 }
                             });
 
-                            const redirectUrl = form.getAttribute('data-kt-redirect-url');
-
-                            if (redirectUrl) {
-                                location.href = redirectUrl;
+                            if (response.data.status) {
+                                localStorage.setItem("sipayuSession", JSON.stringify(response.data));
+                                setTimeout(() => {
+                                    const redirectUrl = '/dashboard';
+                                    location.href = redirectUrl;
+                                }, 2000);
                             }
                         } else {
                             // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
@@ -157,7 +161,7 @@ var KTSigninGeneral = function () {
                         }
                     }).catch(function (error) {
                         Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            text: "Sorry, the email or password is incorrect, please try again.",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
@@ -201,16 +205,20 @@ var KTSigninGeneral = function () {
     return {
         // Initialization
         init: function () {
+            if (localStorage.getItem("sipayuSession") != null) {
+                const redirectUrl = '/dashboard';
+                location.href = redirectUrl;
+            }
             form = document.querySelector('#kt_sign_in_form');
             submitButton = document.querySelector('#kt_sign_in_submit');
 
             handleValidation();
 
-            if (isValidUrl(submitButton.closest('form').getAttribute('action'))) {
-                handleSubmitAjax(); // use for ajax submit
+            handleSubmitAjax(); // use for ajax submit
+            /* if (isValidUrl(submitButton.closest('form').getAttribute('action'))) {
             } else {
                 handleSubmitDemo(); // used for demo purposes only
-            }
+            } */
         }
     };
 }();

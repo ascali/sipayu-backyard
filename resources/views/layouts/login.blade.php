@@ -1,31 +1,19 @@
 <!DOCTYPE html>
-<!--
-Author: Keenthemes
-Product Name: Saul
-Product Version: 1.0.0
-Upgrade to Pro: https://keenthemes.com/products/saul-html-pro
-Website: http://www.keenthemes.com
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
--->
 <html lang="en">
 	<!--begin::Head-->
 	<head><base href="../../"/>
-		<title>Saul Theme by Keenthemes</title>
+		<title>Login | SIPAYU</title>
 		<meta charset="utf-8" />
-		<meta name="description" content="Saul HTML Free - Bootstrap 5 HTML Multipurpose Admin Dashboard Theme" />
-		<meta name="keywords" content="Saul, bootstrap, bootstrap 5, dmin themes, free admin themes, bootstrap admin, bootstrap dashboard" />
+		<meta name="description" content="SIPAYU" />
+		<meta name="keywords" content="sipayu" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:type" content="article" />
-		<meta property="og:title" content="Saul HTML Free - Bootstrap 5 HTML Multipurpose Admin Dashboard Theme" />
+		<meta property="og:title" content="SIPAYU" />
 		<meta property="og:url" content="https://keenthemes.com/products/saul-html-pro" />
-		<meta property="og:site_name" content="Keenthemes | Saul HTML Free" />
+		<meta property="og:site_name" content="SIPAYU" />
 		<link rel="canonical" href="https://preview.keenthemes.com/saul-html-free" />
-		<link rel="shortcut icon" href="public/assets/media/logos/favicon.ico" />
+		<link rel="shortcut icon" href="public/images/sipayu-ori-logo.png" />
 		<!--begin::Fonts(mandatory for all pages)-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
 		<!--end::Fonts-->
@@ -52,21 +40,21 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Header-->
 						<div class="d-flex flex-row-fluid flex-column text-center p-5 p-lg-10 pt-lg-20">
 							<!--begin::Logo-->
-							<a href="../dist/index.html" class="py-2 py-lg-20">
-								<img alt="Logo" src="public/assets/media/logos/mail.svg" class="h-40px h-lg-50px" />
+							<a href="javascript:void(0)" class="py-2 py-lg-20">
+								<img alt="Logo" src="public/images/main.png" class="h-40px h-lg-550px" />
 							</a>
 							<!--end::Logo-->
 							<!--begin::Title-->
-							<h1 class="d-none d-lg-block fw-bold text-white fs-2qx pb-5 pb-md-10">Welcome to Saul HTML Free</h1>
+							<h1 class="d-none d-lg-block fw-bold text-white fs-2qx pb-5 pb-md-10">Welcome to SIPAYU</h1>
 							<!--end::Title-->
 							<!--begin::Description-->
-							<p class="d-none d-lg-block fw-semibold fs-2 text-white">Plan your blog post by choosing a topic creating
-							<br />an outline and checking facts</p>
+							<p class="d-none d-lg-block fw-semibold fs-2 text-white">Plan your destination travel by choosing a place
+							<br />a beautiful and healing places</p>
 							<!--end::Description-->
 						</div>
 						<!--end::Header-->
 						<!--begin::Illustration-->
-						<div class="d-none d-lg-block d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px" style="background-image: url(assets/media/illustrations/sketchy-1/17.png)"></div>
+						<div class="d-none d-lg-block d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px" style="background-image: url(public/assets/media/illustrations/sketchy-1/17.png)"></div>
 						<!--end::Illustration-->
 					</div>
 					<!--end::Wrapper-->
@@ -79,16 +67,14 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Wrapper-->
 						<div class="w-lg-500px p-10 p-lg-15 mx-auto">
 							<!--begin::Form-->
-							<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="../dist/index.html" action="#">
+							<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="" action="#">
 								<!--begin::Heading-->
 								<div class="text-center mb-10">
 									<!--begin::Title-->
-									<h1 class="text-dark mb-3">Sign In to Saul HTML Free</h1>
+									<a href="javascript:void(0)" class="py-2 py-lg-20">
+										<img alt="Logo" src="public/images/sipayu-ori.png" class="h-40px h-lg-250px" />
+									</a>
 									<!--end::Title-->
-									<!--begin::Link-->
-									<div class="text-gray-400 fw-semibold fs-4">New Here?
-									<a href="../dist/authentication/sign-up/basic.html" class="link-danger fw-bold">Create an Account</a></div>
-									<!--end::Link-->
 								</div>
 								<!--begin::Heading-->
 								<!--begin::Input group-->
@@ -127,22 +113,6 @@ License: For each use you must have a valid license purchased only from above li
 										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 									</button>
 									<!--end::Submit button-->
-									<!--begin::Separator-->
-									<div class="text-center text-muted text-uppercase fw-bold mb-5">or</div>
-									<!--end::Separator-->
-									<!--begin::Google link-->
-									<a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">
-									<img alt="Logo" src="public/assets/media/svg/brand-logos/google-icon.svg" class="h-20px me-3" />Continue with Google</a>
-									<!--end::Google link-->
-									<!--begin::Google link-->
-									<a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">
-									<img alt="Logo" src="public/assets/media/svg/brand-logos/facebook-4.svg" class="h-20px me-3" />Continue with Facebook</a>
-									<!--end::Google link-->
-									<!--begin::Google link-->
-									<a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100">
-									<img alt="Logo" src="public/assets/media/svg/brand-logos/apple-black.svg" class="theme-light-show h-20px me-3" />
-									<img alt="Logo" src="public/assets/media/svg/brand-logos/apple-black-dark.svg" class="theme-dark-show h-20px me-3" />Continue with Apple</a>
-									<!--end::Google link-->
 								</div>
 								<!--end::Actions-->
 							</form>
@@ -155,9 +125,7 @@ License: For each use you must have a valid license purchased only from above li
 					<div class="d-flex flex-center flex-wrap fs-6 p-5 pb-0">
 						<!--begin::Links-->
 						<div class="d-flex flex-center fw-semibold fs-6">
-							<a href="https://keenthemes.com" class="text-muted text-hover-danger px-2" target="_blank">About</a>
-							<a href="https://devs.keenthemes.com" class="text-muted text-hover-danger px-2" target="_blank">Support</a>
-							<a href="https://keenthemes.com/products/saul-html-pro" class="text-muted text-hover-danger px-2" target="_blank">Purchase</a>
+							<a href="#" class="text-muted text-hover-danger px-2" target="_blank">Gincu Media Telematika</a>
 						</div>
 						<!--end::Links-->
 					</div>
@@ -175,6 +143,7 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="public/assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Custom Javascript(used for this page only)-->
+		<script>var baseUrlApi = window.location.hostname == '0.0.0.0' ? `http://0.0.0.0:8000` : `https://be-sipayu.indramayukab.go.id`;</script>
 		<script src="public/assets/js/custom/authentication/sign-in/general.js"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->

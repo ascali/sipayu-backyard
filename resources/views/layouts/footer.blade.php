@@ -1,0 +1,46 @@
+<!--begin::Javascript-->
+		<script>var hostUrl = "public/assets/";</script>
+		<script>var baseUrlApi = window.location.hostname == '0.0.0.0' ? `http://0.0.0.0:8000` : `https://be-sipayu.indramayukab.go.id`;</script>
+		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+		<script src="public/assets/plugins/global/plugins.bundle.js"></script>
+		<script src="public/assets/js/scripts.bundle.js"></script>
+		<!--end::Global Javascript Bundle-->
+		<!--begin::Vendors Javascript(used for this page only)-->
+		<script src="public/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+		<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+		<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+		<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+		<script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
+		<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+		<script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+		<script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
+		<script src="https://cdn.amcharts.com/lib/5/geodata/continentsLow.js"></script>
+		<script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
+		<script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js"></script>
+		<script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
+		<script src="public/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+		<!--end::Vendors Javascript-->
+		<!--begin::Custom Javascript(used for this page only)-->
+		<!-- <script src="public/assets/js/widgets.bundle.js"></script>
+		<script src="public/assets/js/custom/widgets.js"></script>
+		<script src="public/assets/js/custom/apps/chat/chat.js"></script>
+		<script src="public/assets/js/custom/utilities/modals/upgrade-plan.js"></script>
+		<script src="public/assets/js/custom/utilities/modals/create-account.js"></script>
+		<script src="public/assets/js/custom/utilities/modals/create-app.js"></script>
+		<script src="public/assets/js/custom/utilities/modals/users-search.js"></script> -->
+		<!--end::Custom Javascript-->
+		<!--end::Javascript-->
+        <script>
+            if (localStorage.getItem("sipayuSession") == null) {
+                window.location = "/login";
+            }
+            $("#kt_datatable_zero_configuration").DataTable();
+            $(document).on("click", "#sign-out", function() {
+                localStorage.removeItem("sipayuSession");
+                window.location = "/login";
+            })
+        </script>
+
+	</body>
+	<!--end::Body-->
+</html>
