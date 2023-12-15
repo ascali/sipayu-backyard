@@ -49,6 +49,19 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        // start custom code
+        if($exception->getStatusCode() == 404){
+            return response(view("errors.404"), 404);
+        }
+        if($exception->getStatusCode() == 500){
+            return response(view("errors.404"), 404);
+        }
+        // end custom code
+
         return parent::render($request, $exception);
     }
+    // public function render($request, Throwable $exception)
+    // {
+    //     return parent::render($request, $exception);
+    // }
 }
