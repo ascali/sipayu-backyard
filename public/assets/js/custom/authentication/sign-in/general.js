@@ -143,7 +143,7 @@ var KTSigninGeneral = function () {
                             if (response.data.status) {
                                 localStorage.setItem("sipayuSession", JSON.stringify(response.data));
                                 setTimeout(() => {
-                                    const redirectUrl = '/dashboard';
+                                    const redirectUrl = baseUrl+'/dashboard';
                                     location.href = redirectUrl;
                                 }, 2000);
                             }
@@ -206,7 +206,7 @@ var KTSigninGeneral = function () {
         // Initialization
         init: function () {
             if (localStorage.getItem("sipayuSession") != null) {
-                const redirectUrl = '/dashboard';
+                const redirectUrl = baseUrl+'/dashboard';
                 location.href = redirectUrl;
             }
             form = document.querySelector('#kt_sign_in_form');
