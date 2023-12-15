@@ -141,11 +141,23 @@ var KTSigninGeneral = function () {
                             });
 
                             if (response.data.status) {
-                                localStorage.setItem("sipayuSession", JSON.stringify(response.data));
-                                setTimeout(() => {
-                                    const redirectUrl = baseUrl+'/dashboard';
-                                    location.href = redirectUrl;
-                                }, 2000);
+                                if (response.data.id_role != 3) {
+                                    localStorage.setItem("sipayuSession", JSON.stringify(response.data));
+                                    setTimeout(() => {
+                                        const redirectUrl = baseUrl+'/dashboard';
+                                        location.href = redirectUrl;
+                                    }, 2000);
+                                } else {
+                                    Swal.fire({
+                                        text: "Sorry, the email or password is incorrect, please try again.",
+                                        icon: "error",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary"
+                                        }
+                                    });
+                                }
                             }
                         } else {
                             // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
