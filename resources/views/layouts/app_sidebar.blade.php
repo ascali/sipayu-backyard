@@ -7,7 +7,7 @@
                 <!--begin:Menu item-->
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a href="/" class="menu-link">
+                    <a href="{{ url('dashboard') }}" class="menu-link">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-chart fs-1">
                                 <span class="path1"></span>
@@ -21,7 +21,7 @@
                 <!--end:Menu item-->
                 <!-- begin::custom -->
                 <div class="menu-item">
-                    <a href="/users" class="menu-link">
+                    <a href="{{ url('users') }}" class="menu-link">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-user fs-1">
                                 <span class="path1"></span>
@@ -32,7 +32,7 @@
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a href="/" class="menu-link">
+                    <a href="{{ url('ads') }}" class="menu-link">
                         <span class="menu-icon">
                             <i class="fa-solid fa-rectangle-ad fs-1"></i>
                         </span>
@@ -40,7 +40,7 @@
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a href="/" class="menu-link">
+                    <a href="{{ url('ebrosure') }}" class="menu-link">
                         <span class="menu-icon">
                             <i class="fa-solid fa-clipboard-list fs-1"></i>
                         </span>
@@ -48,7 +48,7 @@
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a href="/" class="menu-link">
+                    <a href="{{ url('type_of_interest') }}" class="menu-link">
                         <span class="menu-icon">
                             <i class="fa-solid fa-map-location-dot fs-1"></i>
                         </span>
@@ -56,7 +56,7 @@
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a href="/" class="menu-link">
+                    <a href="{{ url('destination') }}" class="menu-link">
                         <span class="menu-icon">
                             <i class="fa-solid fa-location-dot fs-1"></i>
                         </span>
@@ -64,7 +64,7 @@
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a href="/" class="menu-link">
+                    <a href="{{ url('event') }}" class="menu-link">
                         <span class="menu-icon">
                             <i class="fa-solid fa-calendar-day fs-1"></i>
                         </span>
@@ -72,7 +72,7 @@
                     </a>
                 </div>
                 <!-- <div class="menu-item">
-                    <a href="/" class="menu-link">
+                    <a href="{{ url('review') }}" class="menu-link">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-star fs-1">
                                 <span class="path1"></span>
@@ -83,7 +83,7 @@
                     </a>
                 </div> -->
                 <!-- <div class="menu-item">
-                    <a href="/" class="menu-link">
+                    <a href="{{ url('dashboard') }}" class="menu-link">
                         <span class="menu-icon">
                             <i class="fa-solid fa-clock-rotate-left fs-1"></i>
                         </span>

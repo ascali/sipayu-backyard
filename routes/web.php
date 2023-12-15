@@ -15,80 +15,80 @@
 
 $router->get('/', function () use ($router) {
     // return $router->app->version();
-    return view('layouts.login');
+    return view('layouts.login', ["title" => "Login"]);
 });
 
 $router->get('/login', function () use ($router) {
-    return view('layouts.login');
+    return view('layouts.login', ["title" => "Login"]);
 });
 
 $router->get('/reset_password', function () use ($router) {
-    return view('layouts.reset_password');
+    return view('layouts.reset_password', ["title" => "Reset Password"]);
 });
 
 
 $router->group(['prefix' => 'dashboard'], function () use ($router) {
     $router->get('/', function () use ($router) {
-        return view('index');
+        return view('index', ["title" => "Dashboard"]);
     });
 });
 
 $router->group(['prefix' => 'roles'], function () use ($router) {
     $router->get('/', function () use ($router) {
-        return view('modules.roles');
+        return view('modules.roles', ["title" => "Roles"]);
     });
 });
 
 $router->group(['prefix' => 'users'], function () use ($router) {
     $router->get('/', function () use ($router) {
-        return view('modules.users');
+        return view('modules.users', ["title" => "Users"]);
     });
 });
 
 $router->group(['prefix' => 'ads'], function () use ($router) {
     $router->get('/', function () use ($router) {
-        return view('modules.ads');
+        return view('modules.ads', ["title" => "Advertisment"]);
     });
 });
 
 $router->group(['prefix' => 'ebrosure'], function () use ($router) {
     $router->get('/', function () use ($router) {
-        return view('modules.ebrosure');
+        return view('modules.ebrosure', ["title" => "eBrosure"]);
     });
 });
 
 $router->group(['prefix' => 'type_of_interest'], function () use ($router) {
     $router->get('/', function () use ($router) {
-        return view('modules.type_of_interest');
+        return view('modules.type_of_interest', ["title" => "Type of Interest"]);
     });
 });
 
 $router->group(['prefix' => 'destination'], function () use ($router) {
     $router->get('/', function () use ($router) {
-        return view('modules.destination');
+        return view('modules.destination', ["title" => "Destination"]);
     });
 });
 
 $router->group(['prefix' => 'event'], function () use ($router) {
     $router->get('/', function () use ($router) {
-        return view('modules.event');
+        return view('modules.event', ["title" => "Event"]);
     });
 });
 
 $router->group(['prefix' => 'rating'], function () use ($router) {
     $router->get('/', function () use ($router) {
-        return view('modules.rating');
+        return view('modules.rating', ["title" => "Rating"]);
     });
 });
 
 $router->group(['prefix' => 'review'], function () use ($router) {
     $router->get('/', function () use ($router) {
-        return view('modules.review');
+        return view('modules.review', ["title" => "Review"]);
     });
 });
 
 $router->group(['prefix' => 'history'], function () use ($router) {
     $router->get('/', function () use ($router) {
-        return view('modules.history');
+        return view('modules.history', ["title" => "History"]);
     });
 });
