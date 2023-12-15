@@ -13,13 +13,13 @@
 		<meta property="og:url" content="https://keenthemes.com/products/saul-html-pro" />
 		<meta property="og:site_name" content="SIPAYU" />
 		<link rel="canonical" href="https://preview.keenthemes.com/saul-html-free" />
-		<link rel="shortcut icon" href="{{ url('public/images/sipayu-ori-logo.png') }}" />
+		<link rel="shortcut icon" href="{{ url('images/sipayu-ori-logo.png') }}" />
 		<!--begin::Fonts(mandatory for all pages)-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
 		<!--end::Fonts-->
 		<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
-		<link href="{{ url('public/assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-		<link href="{{ url('public/assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ url('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ url('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 		<script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
 	</head>
@@ -41,7 +41,7 @@
 						<div class="d-flex flex-row-fluid flex-column text-center p-5 p-lg-10 pt-lg-20">
 							<!--begin::Logo-->
 							<a href="javascript:void(0)" class="py-2 py-lg-20">
-								<img alt="Logo" src="{{ url('public/images/main.png') }}" class="h-40px h-lg-550px" />
+								<img alt="Logo" src="{{ url('images/main.png') }}" class="h-40px h-lg-550px" />
 							</a>
 							<!--end::Logo-->
 							<!--begin::Title-->
@@ -72,7 +72,7 @@
 								<div class="text-center mb-10">
 									<!--begin::Title-->
 									<a href="javascript:void(0)" class="py-2 py-lg-20">
-										<img alt="Logo" src="{{ url('public/images/sipayu-ori.png') }}" class="h-40px h-lg-250px" />
+										<img alt="Logo" src="{{ url('images/sipayu-ori.png') }}" class="h-40px h-lg-250px" />
 									</a>
 									<!--end::Title-->
 								</div>
@@ -137,15 +137,15 @@
 		</div>
 		<!--end::Root-->
 		<!--begin::Javascript-->
-		<script>var hostUrl = "{{ url('public/assets') }}";</script>
+		<script>var hostUrl = "{{ url('assets') }}";</script>
 		<script>var baseUrl = "{{ url('') }}";</script>
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-		<script src="{{ url('public/assets/plugins/global/plugins.bundle.js') }}"></script>
-		<script src="{{ url('public/assets/js/scripts.bundle.js') }}"></script>
+		<script src="{{ url('assets/plugins/global/plugins.bundle.js') }}"></script>
+		<script src="{{ url('assets/js/scripts.bundle.js') }}"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Custom Javascript(used for this page only)-->
 		<script>var baseUrlApi = window.location.hostname == '0.0.0.0' ? `http://0.0.0.0:8000/public` : `https://be-sipayu.indramayukab.go.id/public`;</script>
-		<script src="{{ url('public/assets/js/custom/authentication/sign-in/general.js') }}"></script>
+		<script src="{{ url('assets/js/custom/authentication/sign-in/general.js') }}"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 	</body>
