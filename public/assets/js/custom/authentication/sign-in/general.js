@@ -141,7 +141,7 @@ var KTSigninGeneral = function () {
                             });
 
                             if (response.data.status) {
-                                if (response.data.id_role != 3) {
+                                if (response.data.user.id_role != 3) {
                                     localStorage.setItem("sipayuSession", JSON.stringify(response.data));
                                     setTimeout(() => {
                                         const redirectUrl = baseUrl+'/dashboard';
