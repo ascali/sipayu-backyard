@@ -13,8 +13,8 @@
                 <!--end::Sidebar mobile toggle-->
                 <!--begin::Logo-->
                 <a href="../dist/index.html" class="app-sidebar-logo">
-                    <img alt="Logo" src="public/images/sipayu-ori-inline.png" class="h-30px theme-light-show" />
-                    <img alt="Logo" src="public/images/sipayu-ori-inline.png" class="h-30px theme-dark-show" />
+                    <img alt="Logo" src="{{ url('images/sipayu-ori-inline.png') }}" class="h-30px theme-light-show" />
+                    <img alt="Logo" src="{{ url('images/sipayu-ori-inline.png') }}" class="h-30px theme-dark-show" />
                 </a>
                 <!--end::Logo-->
                 <!--begin::Sidebar toggle-->
@@ -99,10 +99,10 @@
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
-                                    <div class="fw-bold d-flex align-items-center fs-5">Jane Cooper
+                                    <div class="fw-bold d-flex align-items-center fs-5" id="name-user">Jane Cooper
                                         <!-- <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span> -->
                                     </div>
-                                    <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">jane@kt.com</a>
+                                    <a href="#" class="fw-semibold text-muted text-hover-primary fs-7" id="email-user">jane@kt.com</a>
                                 </div>
                                 <!--end::Username-->
                             </div>
@@ -112,9 +112,9 @@
                         <div class="separator my-2"></div>
                         <!--end::Menu separator-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5">
-                            <a href="javascript:void(0)" class="menu-link px-5">My Profile</a>
-                        </div>
+                        <!-- <div class="menu-item px-5">
+                            <a href="javascript:void(0)" class="menu-link px-5" id="button-my-profile">My Profile</a>
+                        </div> -->
                         <!--end::Menu item-->
                         <!--begin::Menu separator-->
                         <div class="separator my-2"></div>
