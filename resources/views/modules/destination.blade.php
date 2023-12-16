@@ -188,6 +188,7 @@
 					'url': `${baseUrlApi}/api/destination/list_dt`,
 					'type': 'GET',
 					'beforeSend': function (request) {
+						request.setRequestHeader("Accept", `*/*`);
 						request.setRequestHeader("Authorization", `Bearer ${apiKey}`);
 					}
 				},
