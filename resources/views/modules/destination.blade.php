@@ -220,17 +220,6 @@
 				]
 			} );
         });
-		$(document).on("click", 'input[name="type"]', function() {
-			let val = $('input[name="type"]:checked').val();
-			let str = "";
-			if(val=='wa') {
-				str = `https://wa.me/{6285624277920}?text={tuliskan pesan anda}`;
-			}
-			if(val=='web') {
-				str = `https://{halaman-web.anda.com}`;
-			}
-			$("#url").val(str);
-		});
 		$(document).on("keyup", ".search-input", function() {
 			oTable.search($(this).val()).draw() ;
 		});
