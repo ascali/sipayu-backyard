@@ -91,9 +91,9 @@
 				return apiKey;
 			}
 
-			setInterval(() => {
-				refreshKey()
-			}, ((1000 * 60) * 15)/*15min*/);
+			// setInterval(() => {
+			// 	refreshKey()
+			// }, ((1000 * 60) * 15)/*15min*/);
 	
 			function swalFailed() {
 				Swal.fire({

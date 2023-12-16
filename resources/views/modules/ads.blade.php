@@ -27,7 +27,7 @@
 										<ul class="breadcrumb breadcrumb-separatorless fw-semibold mb-6">
 											<!--begin::Item-->
 											<li class="breadcrumb-item text-gray-700 fw-bold lh-1">
-												<a href="../dist/index.html" class="text-gray-500">
+												<a href="javascript:void(0)" class="text-gray-500">
 													<i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
 												</a>
 											</li>
@@ -56,7 +56,7 @@
 									</div>
 									<!--end::Page title-->
 									<!--begin::Actions-->
-									<a href="javascript:void(0)" class="btn btn-sm btn-success ms-3 px-4 py-3 sipayu_modal">Create</a>
+									<a href="javascript:void(0)" class="btn btn-sm btn-success ms-3 px-4 py-3 sipayu_modal">Tambah Data</a>
 									<!--end::Actions-->
 								</div>
 								<!--end::Toolbar wrapper-->
@@ -78,53 +78,24 @@
 											<div class="card-body pt-6">
                                                 
                                                 <div class="table-responsive">
-                                                    <table id="kt_datatable_zero_configuration" class="table table-row-bordered gy-5">
+                                                    <table id="datatable_sipayu" class="table table-row-bordered gy-5">
                                                         <thead>
                                                             <tr class="fw-semibold fs-6 text-muted">
-                                                                <th>Name</th>
-                                                                <th>Position</th>
-                                                                <th>Office</th>
-                                                                <th>Age</th>
-                                                                <th>Start date</th>
-                                                                <th>Salary</th>
+                                                                <th>ame</th>
+                                                                <th>type</th>
+                                                                <th>image</th>
+                                                                <th>url</th>
+                                                                <th>description</th>
+                                                                <th>efective</th>
+                                                                <th>expired</th>
+                                                                <!-- <th>latitude</th> -->
+																<!-- <th>longitude</th> -->
+																<th>Dibuat</th>
+																<th></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>Tiger Nixon</td>
-                                                                <td>System Architect</td>
-                                                                <td>Edinburgh</td>
-                                                                <td>61</td>
-                                                                <td>2011/04/25</td>
-                                                                <td>$320,800</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Garrett Winters</td>
-                                                                <td>Accountant</td>
-                                                                <td>Tokyo</td>
-                                                                <td>63</td>
-                                                                <td>2011/07/25</td>
-                                                                <td>$170,750</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Ashton Cox</td>
-                                                                <td>Junior Technical Author</td>
-                                                                <td>San Francisco</td>
-                                                                <td>66</td>
-                                                                <td>2009/01/12</td>
-                                                                <td>$86,000</td>
-                                                            </tr>
                                                         </tbody>
-                                                        <tfoot>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>Position</th>
-                                                                <th>Office</th>
-                                                                <th>Age</th>
-                                                                <th>Start date</th>
-                                                                <th>Salary</th>
-                                                            </tr>
-                                                        </tfoot>
                                                     </table>
                                                 </div>
 
@@ -153,6 +124,283 @@
 		<!--end::Page-->
 	</div>
 	<!--end::App-->
+
+	<!-- Modal -->
+	<form id="form">
+		<div class="modal fade" id="modalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalFormLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalFormLabel">Form {{ $title }}</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+						<input type="hidden" name="id" id="id" />
+						<div class="mb-3">
+							<label for="name" class="col-form-label">Tipe Ad:</label>
+							<div class="form-check mb-3">
+								<input class="form-check-input" type="radio" name="type" value="wa" id="type-wa" checked />
+								<label class="form-check-label" for="type-wa">
+								  Whatsapp
+								</label>
+							  </div>
+							  <div class="form-check mb-3">
+								<input class="form-check-input" type="radio" name="type" value="web" id="type-web" />
+								<label class="form-check-label" for="type-we">
+								  Web
+								</label>
+							</div>
+						</div>
+						<div class="mb-3">
+							<label for="name" class="col-form-label">Nama:</label>
+							<input type="text" name="name" class="form-control" id="name" required />
+						</div>
+						<div class="mb-3">
+						  <label for="image" class="form-label">Gambar Iklan</label>
+						  <input class="form-control form-control-sm" id="image" type="file" required />
+						</div>
+						<div class="mb-3">
+							<label for="efective" class="col-form-label">Efective:</label>
+							<input type="date" name="efective" class="form-control" id="efective" required />
+						</div>
+						<div class="mb-3">
+							<label for="expired" class="col-form-label">Expired:</label>
+							<input type="date" name="expired" class="form-control" id="expired" required />
+						</div>
+						<div class="mb-3">
+							<label for="url" class="col-form-label">Url/Alamt Link:</label>
+							<textarea class="form-control" name="url" id="url" required></textarea>
+						</div>
+						<div class="mb-3">
+							<label for="description" class="col-form-label">Description:</label>
+							<textarea class="form-control" name="description" id="description"></textarea>
+						</div>
+						<div class="mb-3 d-none">
+							<label for="latitude" class="col-form-label">Latitude:</label>
+							<input type="text" name="latitude" class="form-control" id="latitude" />
+						</div>
+						<div class="mb-3 d-none">
+							<label for="longitude" class="col-form-label">Longitude:</label>
+							<input type="text" name="longitude" class="form-control" id="longitude" />
+						</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+					<button type="sumit" class="btn btn-primary">Submit</button>
+				</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+    <script>
+		var isModuleApi = `ads`;
+		var action;
+        $(document).ready(function() {
+			oTable = $('#datatable_sipayu').DataTable( {
+				'ajax': {
+					'url': `${baseUrlApi}/api/ads/list_dt`,
+					'type': 'GET',
+					'beforeSend': function (request) {
+						request.setRequestHeader("Authorization", `Bearer ${apiKey}`);
+					}
+				},
+				"processing":true,
+				"serverSide":true,
+				"stateSave":true,
+				"bDestroy": true,
+				"retrieve": true,
+				"columns": [
+					{ "data": "name" },
+					{ "data": "type" },
+					{ "data": null, "render": (row) => `<img src="${row.image}" class="rounded mx-auto d-block" alt="" style="width: 100px;" />` },
+					{ "data": "url"},
+					{ "data": "description"  },
+					{ "data": "efective" },
+					{ "data": "expired"  },
+					// { "data": "latitude"  },
+					// { "data": "longitude"  },
+					{ "data": "created_at" },
+					{ 
+						"data": null,
+						"render": function(row) {
+							let html = `
+								<a href="javascript:void(0)" class="btn btn-sm btn-info edit" data-id="${row.id}">Ubah</a>
+								<a href="javascript:void(0)" class="btn btn-sm btn-danger delete" data-id="${row.id}">Hapus</a>
+							`;
+							return html;
+						}
+					},
+				]
+			} );
+        });
+		$('.search-input').keyup(function(){
+			oTable.search($(this).val()).draw() ;
+		});
+		$(document).on("click", ".sipayu_modal", function() {
+			action = "add";
+			$("#modalForm").modal("show");
+		});
+		$(document).on("click", ".edit", function() {
+			action = "edit";
+			let id = $(this).attr("data-id");
+			$("#id").val(id);
+			getData(id);
+			$("#modalForm").modal("show");
+		});
+		$(document).on("click", ".delete", async function() {
+			let id = $(this).attr("data-id");
+			$("#id").val(id);
+			await deleteData(id);
+		});
+		$(document).on("submit", "#form", async function(e) {
+			e.preventDefault();
+			await submitData();
+			setTimeout(async () => {
+				await $('form').trigger("reset");
+			}, 1000);
+			$("#modalForm").modal("hide");
+		});
+
+		async function getData(id) {
+			let config = {
+			  method: 'get',
+			  maxBodyLength: Infinity,
+			  url: `${baseUrlApi}/api/ads/${id}`,
+			  headers: { 
+				"Authorization": `Bearer ${apiKey}`
+			  }
+			};
+			
+			await axios.request(config)
+			.then((response) => {
+			  console.log(JSON.stringify(response.data));
+			  let data = response.data.data;
+			  $("#name").val(data.name);
+			  $("#type").val(data.type);
+			  //   $("#image").val(data.image);
+			  $("#url").val(data.url);
+			  $("#description").val(data.description);
+			  $("#efective").val(moment(data.efective).format("YYYY-MM-DD"));
+			  $("#expired").val(moment(data.expired).format("YYYY-MM-DD"));
+			  $("#latitude").val(data.latitude);
+			  $("#longitude").val(data.longitude);
+			})
+			.catch((error) => {
+			  console.log(error);
+			  swalFailed();
+			});
+
+		}
+
+		async function deleteData(id) {
+			swalWithBootstrapButtons.fire({
+				title: "Apakah yakin?",
+				text: "Tidak akan dapat dikembalikan!",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Ya, hapus!",
+				cancelButtonText: "Tidak, batal!",
+				reverseButtons: true
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					await execute(id);
+					await swalWithBootstrapButtons.fire({
+						title: "Terhapus!",
+						text: "Data Anda telah dihapus.",
+						icon: "success"
+					});
+					setTimeout(async () => {
+						await oTable.ajax.reload( null, false );
+					}, 1000);
+				} else if (
+					result.dismiss === Swal.DismissReason.cancel
+				) {
+					await swalWithBootstrapButtons.fire({
+						title: "Dibatalkan",
+						text: "Data Anda aman!",
+						icon: "error"
+					});
+				}
+			});
+
+			let execute = async (id) => {
+				let config = {
+				  method: 'delete',
+				  maxBodyLength: Infinity,
+				  url: `${baseUrlApi}/api/ads/delete/${id}`,
+				  headers: { 
+					"Authorization": `Bearer ${apiKey}` 
+				  }
+				};
+				
+				await axios.request(config)
+				.then((response) => {
+				  console.log(JSON.stringify(response.data));
+					Swal.fire({
+						text: "Berhasil!",
+						icon: "success",
+						buttonsStyling: false,
+						confirmButtonText: "Ok, mengerti!",
+						customClass: {
+							confirmButton: "btn btn-primary"
+						}
+					});
+				})
+				.catch((error) => {
+				  console.log(error);
+				  	swalFailed();
+				});
+			}
+				
+
+		}
+
+		async function submitData() {
+			let data = {
+			  "name": $("#name").val(),
+			  "type": $('input[name="type"]:checked').val(),
+			  "image": $("#image").val(),
+			  "url": $("#url").val(),
+			  "description": $("#description").val(),
+			  "efective": $("#efective").val(),
+			  "expired": $("#expired").val(),
+			  "latitude": $("#latitude").val(),
+			  "longitude": $("#longitude").val(),
+			};
+			data = JSON.stringify(data);
+			let isUrl = action == "add" ? `${baseUrlApi}/api/ads/create` : `${baseUrlApi}/api/ads/update/${$("#id").val()}`;
+			let config = {
+			  method: 'post',
+			  maxBodyLength: Infinity,
+			  url: isUrl,
+			  headers: { 
+				'Content-Type': 'application/json', 
+				"Authorization": `Bearer ${apiKey}`
+			  },
+			  data : data
+			};
+			
+			await axios.request(config)
+			.then(async (response) => {
+			  console.log(JSON.stringify(response.data));
+				await swalWithBootstrapButtons.fire({
+					title: "Berhasil!",
+					text: "Data Anda telah disubmit.",
+					icon: "success"
+				});
+				setTimeout(async () => {
+					await oTable.ajax.reload( null, false );
+				}, 1000);
+			})
+			.catch((error) => {
+			  console.log(error);
+				swalFailed();
+			});
+		}
+
+    </script>
+
 	@include('layouts.scrolltop')
 	@include('layouts.modal_template')
 @include('layouts.footer')
