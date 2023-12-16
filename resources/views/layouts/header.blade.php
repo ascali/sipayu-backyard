@@ -76,21 +76,24 @@
 				buttonsStyling: false
 			});
 	
-			async function refreshKey(apiKey) {
+			async function refreshKey() {
 				let headersList = {
-				"Accept": "*/*",
+					"Accept": "*/*",
 					"Authorization": `Bearer ${apiKey}` 
 				}
-				
 				let reqOptions = {
-				url: `${baseUrlApi}/api/refresh`,
-				method: "POST",
-				headers: headersList,
+					url: `${baseUrlApi}/api/refresh`,
+					method: "POST",
+					headers: headersList,
 				}
 				let response = await axios.request(reqOptions);
 				apiKey = response.data.data;
 				return apiKey;
 			}
+
+			setInterval(() => {
+				refreshKey()
+			}, ((1000 * 60) * 15)/*15min*/);
 	
 			function swalFailed() {
 				Swal.fire({
