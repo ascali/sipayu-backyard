@@ -81,7 +81,7 @@
                                                     <table id="datatable_sipayu" class="table table-row-bordered gy-5">
                                                         <thead>
                                                             <tr class="fw-semibold fs-6 text-muted">
-                                                                <th>ame</th>
+                                                                <th>name</th>
                                                                 <th>type</th>
                                                                 <th>image</th>
                                                                 <th>url</th>
