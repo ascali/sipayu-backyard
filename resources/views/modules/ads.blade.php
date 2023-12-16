@@ -197,7 +197,6 @@
 	</form>
 
     <script>
-		var isModuleApi = `ads`;
 		var action;
         $(document).ready(function() {
 			oTable = $('#datatable_sipayu').DataTable( {
