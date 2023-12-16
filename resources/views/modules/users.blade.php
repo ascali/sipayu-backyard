@@ -78,53 +78,21 @@
 											<div class="card-body pt-6">
                                                 
                                                 <div class="table-responsive">
-                                                    <table id="kt_datatable_zero_configuration" class="table table-row-bordered gy-5">
+                                                    <table id="datatable_sipayu" class="table table-row-bordered gy-5">
                                                         <thead>
                                                             <tr class="fw-semibold fs-6 text-muted">
-                                                                <th>Name</th>
-                                                                <th>Position</th>
-                                                                <th>Office</th>
-                                                                <th>Age</th>
-                                                                <th>Start date</th>
-                                                                <th>Salary</th>
+                                                                <th>Nama</th>
+                                                                <th>Role</th>
+                                                                <th>Email</th>
+                                                                <th>No HP</th>
+                                                                <th>Alamat</th>
+                                                                <th>Latitude</th>
+                                                                <th>Longitude</th>
+                                                                <th>Dibuat</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>Tiger Nixon</td>
-                                                                <td>System Architect</td>
-                                                                <td>Edinburgh</td>
-                                                                <td>61</td>
-                                                                <td>2011/04/25</td>
-                                                                <td>$320,800</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Garrett Winters</td>
-                                                                <td>Accountant</td>
-                                                                <td>Tokyo</td>
-                                                                <td>63</td>
-                                                                <td>2011/07/25</td>
-                                                                <td>$170,750</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Ashton Cox</td>
-                                                                <td>Junior Technical Author</td>
-                                                                <td>San Francisco</td>
-                                                                <td>66</td>
-                                                                <td>2009/01/12</td>
-                                                                <td>$86,000</td>
-                                                            </tr>
                                                         </tbody>
-                                                        <tfoot>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>Position</th>
-                                                                <th>Office</th>
-                                                                <th>Age</th>
-                                                                <th>Start date</th>
-                                                                <th>Salary</th>
-                                                            </tr>
-                                                        </tfoot>
                                                     </table>
                                                 </div>
 
@@ -153,6 +121,72 @@
 		<!--end::Page-->
 	</div>
 	<!--end::App-->
+
+	<!-- Modal -->
+	<div class="modal fade" id="modalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalFormLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="modalFormLabel">Form {{ $title }}</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<form>
+			<div class="mb-3">
+				<label for="recipient-name" class="col-form-label">Recipient:</label>
+				<input type="text" class="form-control" id="recipient-name">
+			</div>
+			<div class="mb-3">
+				<label for="message-text" class="col-form-label">Message:</label>
+				<textarea class="form-control" id="message-text"></textarea>
+			</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+			<button type="button" class="btn btn-primary">Submit</button>
+		</div>
+		</div>
+	</div>
+	</div>
+
+    <script>
+		$.fn.dataTable.ext.errMode = 'throw';
+		var oTable;
+        $(document).ready(function() {
+			oTable = $('#datatable_sipayu').DataTable( {
+				'ajax': {
+					'url': `${baseUrlApi}/api/users/list`,
+					'type': 'GET',
+					'beforeSend': function (request) {
+						request.setRequestHeader("Authorization", `Bearer ${apiKey}`);
+					}
+				},
+				"processing":true,
+				"serverSide":true,
+				"stateSave":true,
+				"bDestroy": true,
+				"retrieve": true,
+				"columns": [
+					{ "data": "users_name" },
+					{ "data": "roles_name" },
+					{ "data": "users_email"  },
+					{ "data": "users_mobile_no" },
+					{ "data": "users_address"  },
+					{ "data": "users_latitude" },
+					{ "data": "users_longitude"  },
+					{ "data": "users_created_at" },
+				]
+			} );
+        });
+		$('.search-input').keyup(function(){
+			oTable.search($(this).val()).draw() ;
+		});
+		$(document).on("click", ".sipayu_modal", function() {
+			$("#modalForm").modal("show");
+		})
+    </script>
+
 	@include('layouts.scrolltop')
 	@include('layouts.modal_template')
 @include('layouts.footer')

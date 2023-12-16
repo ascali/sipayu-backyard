@@ -110,7 +110,7 @@ var KTSigninGeneral = function () {
             e.preventDefault();
 
             // Validate form
-            validator.validate().then(function (status) {
+            validator.validate().then(async function (status) {
                 if (status == 'Valid') {
                     // Show loading indication
                     submitButton.setAttribute('data-kt-indicator', 'on');
@@ -125,8 +125,8 @@ var KTSigninGeneral = function () {
                     formdata.append("email", email);
                     formdata.append("password", password);
                     
-                    axios.post(`${baseUrlApi}/api/login`, formdata).then(function (response) {
-                        if (response) {
+                    await axios.post(`${baseUrlApi}/api/login`, formdata).then(function (response) {
+                        if (response.status && response.data.data.user.id_role < 3) {
                             form.reset();
 
                             // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
@@ -140,29 +140,16 @@ var KTSigninGeneral = function () {
                                 }
                             });
 
-                            if (response.data.status) {
-                                if (response.data.user.id_role != 3) {
-                                    localStorage.setItem("sipayuSession", JSON.stringify(response.data));
-                                    setTimeout(() => {
-                                        const redirectUrl = baseUrl+'/dashboard';
-                                        location.href = redirectUrl;
-                                    }, 2000);
-                                } else {
-                                    Swal.fire({
-                                        text: "Sorry, the email or password is incorrect, please try again.",
-                                        icon: "error",
-                                        buttonsStyling: false,
-                                        confirmButtonText: "Ok, got it!",
-                                        customClass: {
-                                            confirmButton: "btn btn-primary"
-                                        }
-                                    });
-                                }
-                            }
+                            localStorage.setItem("sipayuSession", JSON.stringify(response.data));
+                            setTimeout(() => {
+                                const redirectUrl = baseUrl+'/dashboard';
+                                location.href = redirectUrl;
+                            }, 2000);
+
                         } else {
                             // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
-                                text: "Sorry, the email or password is incorrect, please try again.",
+                                text: "Sorry, the email or password is incorrect, please try again!!.",
                                 icon: "error",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok, got it!",
@@ -172,8 +159,9 @@ var KTSigninGeneral = function () {
                             });
                         }
                     }).catch(function (error) {
+                        console.log("🚀 ~ file: general.js:163 ~ error:", error)
                         Swal.fire({
-                            text: "Sorry, the email or password is incorrect, please try again.",
+                            text: "Sorry, the email or password is incorrect, please try again!!!.",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
