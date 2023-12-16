@@ -146,7 +146,7 @@
 							  </div>
 							  <div class="form-check mb-3">
 								<input class="form-check-input" type="radio" name="type" value="web" id="type-web" />
-								<label class="form-check-label" for="type-we">
+								<label class="form-check-label" for="type-web">
 								  Web
 								</label>
 							</div>
@@ -154,10 +154,6 @@
 						<div class="mb-3">
 							<label for="name" class="col-form-label">Nama:</label>
 							<input type="text" name="name" class="form-control" id="name" required />
-						</div>
-						<div class="mb-3">
-						  <label for="image" class="form-label">Gambar Iklan</label>
-						  <input class="form-control form-control-sm" id="image" type="file" required />
 						</div>
 						<div class="mb-3">
 							<label for="efective" class="col-form-label">Efective:</label>
@@ -169,7 +165,8 @@
 						</div>
 						<div class="mb-3">
 							<label for="url" class="col-form-label">Url/Alamt Link:</label>
-							<textarea class="form-control" name="url" id="url" required></textarea>
+							<textarea class="form-control" name="url" id="url" required>https://wa.me/{628112345678}?text={tuliskan pesan anda}</textarea>
+							<label for="url"><small>Hanya ubah di dalam tanda { dan }</small></label>
 						</div>
 						<div class="mb-3">
 							<label for="description" class="col-form-label">Description:</label>
@@ -183,6 +180,12 @@
 							<label for="longitude" class="col-form-label">Longitude:</label>
 							<input type="text" name="longitude" class="form-control" id="longitude" />
 						</div>
+						<div class="mb-3">
+						  <label for="image" class="form-label">Gambar Iklan</label>
+						  <input class="form-control form-control-sm" id="file" accept=".jpg, .png, .jpeg" type="file" onchange="preview_image()" />
+						  <input type="hidden" name="image" id="imageBase64" />
+						</div>
+						<div class="mb-3"><img id="ads-img-thumbnail" src="" class="img-thumbnail mx-auto d-block" alt="..."></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -234,12 +237,25 @@
 				]
 			} );
         });
-		$('.search-input').keyup(function(){
+		$(document).on("click", 'input[name="type"]', function() {
+			let val = $('input[name="type"]:checked').val();
+			let str = "";
+			if(val=='wa') {
+				str = `https://wa.me/{6285624277920}?text={tuliskan pesan anda}`;
+			}
+			if(val=='web') {
+				str = `https://{halaman-web.anda.com}`;
+			}
+			$("#url").val(str);
+		});
+		$(document).on("keyup", ".search-input", function() {
 			oTable.search($(this).val()).draw() ;
 		});
 		$(document).on("click", ".sipayu_modal", function() {
 			action = "add";
+			$("#ads-img-thumbnail").attr("src", "");
 			$("#modalForm").modal("show");
+			
 		});
 		$(document).on("click", ".edit", function() {
 			action = "edit";
@@ -256,10 +272,6 @@
 		$(document).on("submit", "#form", async function(e) {
 			e.preventDefault();
 			await submitData();
-			setTimeout(async () => {
-				await $('form').trigger("reset");
-			}, 1000);
-			$("#modalForm").modal("hide");
 		});
 
 		async function getData(id) {
@@ -278,7 +290,8 @@
 			  let data = response.data.data;
 			  $("#name").val(data.name);
 			  $("#type").val(data.type);
-			  //   $("#image").val(data.image);
+			  $("#imageBase64").val(data.image);
+			  $("#ads-img-thumbnail").attr("src", data.image);
 			  $("#url").val(data.url);
 			  $("#description").val(data.description);
 			  $("#efective").val(moment(data.efective).format("YYYY-MM-DD"));
@@ -357,48 +370,153 @@
 		}
 
 		async function submitData() {
-			let data = {
-			  "name": $("#name").val(),
-			  "type": $('input[name="type"]:checked').val(),
-			  "image": $("#image").val(),
-			  "url": $("#url").val(),
-			  "description": $("#description").val(),
-			  "efective": $("#efective").val(),
-			  "expired": $("#expired").val(),
-			  "latitude": $("#latitude").val(),
-			  "longitude": $("#longitude").val(),
-			};
-			data = JSON.stringify(data);
-			let isUrl = action == "add" ? `${baseUrlApi}/api/ads/create` : `${baseUrlApi}/api/ads/update/${$("#id").val()}`;
-			let config = {
-			  method: 'post',
-			  maxBodyLength: Infinity,
-			  url: isUrl,
-			  headers: { 
-				'Content-Type': 'application/json', 
-				"Authorization": `Bearer ${apiKey}`
-			  },
-			  data : data
-			};
-			
-			await axios.request(config)
-			.then(async (response) => {
-			  console.log(JSON.stringify(response.data));
-				await swalWithBootstrapButtons.fire({
-					title: "Berhasil!",
-					text: "Data Anda telah disubmit.",
-					icon: "success"
+			if ($("#imageBase64").val()!='') {
+				let data = {
+				  "name": $("#name").val(),
+				  "type": $('input[name="type"]:checked').val(),
+				  "image": $("#imageBase64").val(),
+				  "url": $("#url").val(),
+				  "description": $("#description").val(),
+				  "efective": $("#efective").val(),
+				  "expired": $("#expired").val(),
+				  "latitude": $("#latitude").val(),
+				  "longitude": $("#longitude").val(),
+				};
+				data = JSON.stringify(data);
+				let isUrl = action == "add" ? `${baseUrlApi}/api/ads/create` : `${baseUrlApi}/api/ads/update/${$("#id").val()}`;
+				let config = {
+				  method: 'post',
+				  maxBodyLength: Infinity,
+				  url: isUrl,
+				  headers: { 
+					'Content-Type': 'application/json', 
+					"Authorization": `Bearer ${apiKey}`
+				  },
+				  data : data
+				};
+				
+				await axios.request(config)
+				.then(async (response) => {
+				  console.log(JSON.stringify(response.data));
+					await swalWithBootstrapButtons.fire({
+						title: "Berhasil!",
+						text: "Data Anda telah disubmit.",
+						icon: "success"
+					});
+					setTimeout(async () => {
+						await oTable.ajax.reload( null, false );
+					}, 1000);
+					setTimeout(async () => {
+						await $('form').trigger("reset");
+					}, 1000);
+					$("#modalForm").modal("hide");
+				})
+				.catch((error) => {
+				  console.log(error);
+					swalFailed();
 				});
-				setTimeout(async () => {
-					await oTable.ajax.reload( null, false );
-				}, 1000);
-			})
-			.catch((error) => {
-			  console.log(error);
-				swalFailed();
-			});
+			} else {
+				await swalWithBootstrapButtons.fire({
+					title: "Galat!",
+					text: "File Gambar harus di isi!",
+					icon: "error"
+				});
+			}
 		}
 
+		function readFile() {
+			if (!this.files || !this.files[0]) return;
+			const FR = new FileReader();
+			FR.addEventListener("load", function(evt) {
+				document.querySelector("#ads-img-thumbnail").src = evt.target.result;
+				document.querySelector("#imageBase64").value	 = evt.target.result;
+			}); 
+			FR.readAsDataURL(this.files[0]);
+		}
+		// document.querySelector("#file").addEventListener("change", readFile);
+
+		async function preview_image() {
+			const file = document.getElementById('file');
+			const image = await process_image(file.files[0]);
+			document.querySelector("#ads-img-thumbnail").src = image;
+			document.querySelector("#imageBase64").value	 = image;
+			// console.log(image)
+		}
+
+		async function reduce_image_file_size(base64Str, MAX_WIDTH = 450, MAX_HEIGHT = 450) {
+			let resized_base64 = await new Promise((resolve) => {
+				let img = new Image()
+				img.src = base64Str
+				img.onload = () => {
+					let canvas = document.createElement('canvas')
+					let width = img.width
+					let height = img.height
+		
+					if (width > height) {
+						if (width > MAX_WIDTH) {
+							height *= MAX_WIDTH / width
+							width = MAX_WIDTH
+						}
+					} else {
+						if (height > MAX_HEIGHT) {
+							width *= MAX_HEIGHT / height
+							height = MAX_HEIGHT
+						}
+					}
+					canvas.width = width
+					canvas.height = height
+					let ctx = canvas.getContext('2d')
+					ctx.drawImage(img, 0, 0, width, height)
+					resolve(canvas.toDataURL()) // this will return base64 image results after resize
+				}
+			});
+			return resized_base64;
+		}
+		
+		async function image_to_base64(file) {
+			let result_base64 = await new Promise((resolve) => {
+				let fileReader = new FileReader();
+				fileReader.onload = (e) => resolve(fileReader.result);
+				fileReader.onerror = (error) => {
+					console.log(error)
+					alert('An Error occurred please try again, File might be corrupt');
+				};
+				fileReader.readAsDataURL(file);
+			});
+			return result_base64;
+		}
+		
+		async function process_image(file, min_image_size = 300) {
+			const res = await image_to_base64(file);
+			let dataBase64 = "";
+			if (res) {
+				const old_size = calc_image_size(res);
+				if (old_size > min_image_size) {
+					const resized = await reduce_image_file_size(res);
+					const new_size = calc_image_size(resized)
+					console.log('new_size=> ', new_size, 'KB');
+					console.log('old_size=> ', old_size, 'KB');
+					dataBase64 = resized;
+				} else {
+					console.log('image already small enough')
+					dataBase64 = res;
+				}
+		
+			} else {
+				console.log('return err')
+				dataBase64 = '';
+			}
+			return dataBase64;
+		}
+		
+		function calc_image_size(image) {
+			let y = 1;
+			if (image.endsWith('==')) {
+				y = 2
+			}
+			const x_size = (image.length * (3 / 4)) - y
+			return Math.round(x_size / 1024)
+		}
     </script>
 
 	@include('layouts.scrolltop')
