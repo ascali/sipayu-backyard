@@ -99,10 +99,10 @@
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
-                                    <div class="fw-bold d-flex align-items-center fs-5" id="name-user">Jane Cooper
+                                    <div class="fw-bold d-flex align-items-center fs-5" id="name-user">SIPAYU
                                         <!-- <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span> -->
                                     </div>
-                                    <a href="#" class="fw-semibold text-muted text-hover-primary fs-7" id="email-user">jane@kt.com</a>
+                                    <a href="#" class="fw-semibold text-muted text-hover-primary fs-7" id="email-user">sipayu@indramayukab.go.id</a>
                                 </div>
                                 <!--end::Username-->
                             </div>

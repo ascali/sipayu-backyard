@@ -29,7 +29,7 @@ $router->get('/reset_password', function () use ($router) {
 
 $router->group(['prefix' => 'dashboard'], function () use ($router) {
     $router->get('/', function () use ($router) {
-        return view('index', ["title" => "Dashboard"]);
+        return view('modules.dashboard', ["title" => "Dashboard"]);
     });
 });
 

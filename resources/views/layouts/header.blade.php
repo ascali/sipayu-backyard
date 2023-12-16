@@ -14,9 +14,9 @@
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:type" content="article" />
 		<meta property="og:title" content="SIPAYU" />
-		<meta property="og:url" content="https://keenthemes.com/products/saul-html-pro" />
+		<meta property="og:url" content="https://sipayu.indramayukab.go.id" />
 		<meta property="og:site_name" content="SIPAYU" />
-		<link rel="canonical" href="https://preview.keenthemes.com/saul-html-free" />
+		<link rel="canonical" href="https://sipayu.indramayukab.go.id" />
 		<link rel="shortcut icon" href="{{ url('images/sipayu-ori-logo.png') }}" />
 		<!--begin::Fonts(mandatory for all pages)-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
@@ -32,7 +32,7 @@
 		<script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
 
 		<!--begin::Javascript-->
-		<script>var hostUrl = "{{ url('assets') }}";</script>
+		<script>var hostUrl = "{{ url('public/assets') }}";</script>
 		<script>var baseUrl = "{{ url('') }}";</script>
 		<script>var baseUrlApi = window.location.hostname == '0.0.0.0' ? `http://0.0.0.0:8000/public` : `https://be-sipayu.indramayukab.go.id/public`;</script>
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
@@ -54,16 +54,6 @@
 		<script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
 		<script src="{{ url('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 		<!--end::Vendors Javascript-->
-		<!--begin::Custom Javascript(used for this page only)-->
-		<script src="{{ url('assets/js/widgets.bundle.js') }}"></script>
-		<script src="{{ url('assets/js/custom/widgets.js') }}"></script>
-		<script src="{{ url('assets/js/custom/apps/chat/chat.js') }}"></script>
-		<script src="{{ url('assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
-		<script src="{{ url('assets/js/custom/utilities/modals/create-account.js') }}"></script>
-		<script src="{{ url('assets/js/custom/utilities/modals/create-app.js') }}"></script>
-		<script src="{{ url('assets/js/custom/utilities/modals/users-search.js') }}"></script>
-		<!--end::Custom Javascript-->
-		<!--end::Javascript-->
 		<script>
 			if (localStorage.getItem("sipayuSession") == null) {
 				window.location = "{{ url('login') }}";
@@ -74,13 +64,47 @@
 				window.location = "{{ url('login') }}";
 			});
 		
-			let session = JSON.parse(localStorage.sipayuSession);
+			var session = JSON.parse(localStorage.sipayuSession);
 			var apiKey = session.data.access_token;
-
-			$("#name-user").html(session.data.user.name);
-			$("#email-user").html(session.data.user.email);
-		
+			var oTable;
+			
+			var swalWithBootstrapButtons = Swal.mixin({
+				customClass: {
+					confirmButton: "btn btn-success",
+					cancelButton: "btn btn-danger"
+				},
+				buttonsStyling: false
+			});
+	
+			async function refreshKey(apiKey) {
+				let headersList = {
+				"Accept": "*/*",
+					"Authorization": `Bearer ${apiKey}` 
+				}
+				
+				let reqOptions = {
+				url: `${baseUrlApi}/api/refresh`,
+				method: "POST",
+				headers: headersList,
+				}
+				let response = await axios.request(reqOptions);
+				apiKey = response.data.data;
+				return apiKey;
+			}
+	
+			function swalFailed() {
+				Swal.fire({
+					text: "Galat, hubungi administrator!",
+					icon: "warning",
+					buttonsStyling: false,
+					confirmButtonText: "Ok, mengerti!",
+					customClass: {
+						confirmButton: "btn btn-primary"
+					}
+				});
+			}
 		</script>
+		<!--end::Javascript-->
 
 	</head>
 	<!--end::Head-->

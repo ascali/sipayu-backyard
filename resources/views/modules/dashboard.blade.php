@@ -1,4 +1,15 @@
 @include('layouts.header')
+
+		<!--begin::Custom Javascript(used for this page only)-->
+		<script src="{{ url('assets/js/widgets.bundle.js') }}"></script>
+		<script src="{{ url('assets/js/custom/widgets.js') }}"></script>
+		<script src="{{ url('assets/js/custom/apps/chat/chat.js') }}"></script>
+		<script src="{{ url('assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
+		<script src="{{ url('assets/js/custom/utilities/modals/create-account.js') }}"></script>
+		<script src="{{ url('assets/js/custom/utilities/modals/create-app.js') }}"></script>
+		<script src="{{ url('assets/js/custom/utilities/modals/users-search.js') }}"></script>
+		<!--end::Custom Javascript-->
+		
 	<!--begin::App-->
 	<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
 		<!--begin::Page-->

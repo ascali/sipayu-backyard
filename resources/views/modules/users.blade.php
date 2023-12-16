@@ -27,7 +27,7 @@
 										<ul class="breadcrumb breadcrumb-separatorless fw-semibold mb-6">
 											<!--begin::Item-->
 											<li class="breadcrumb-item text-gray-700 fw-bold lh-1">
-												<a href="../dist/index.html" class="text-gray-500">
+												<a href="javascript:void(0)" class="text-gray-500">
 													<i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
 												</a>
 											</li>
@@ -56,7 +56,7 @@
 									</div>
 									<!--end::Page title-->
 									<!--begin::Actions-->
-									<a href="javascript:void(0)" class="btn btn-sm btn-success ms-3 px-4 py-3 sipayu_modal">Create</a>
+									<a href="javascript:void(0)" class="btn btn-sm btn-success ms-3 px-4 py-3 sipayu_modal">Tambah Data</a>
 									<!--end::Actions-->
 								</div>
 								<!--end::Toolbar wrapper-->
@@ -89,6 +89,7 @@
                                                                 <th>Latitude</th>
                                                                 <th>Longitude</th>
                                                                 <th>Dibuat</th>
+																<th></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -123,36 +124,59 @@
 	<!--end::App-->
 
 	<!-- Modal -->
-	<div class="modal fade" id="modalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalFormLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-scrollable">
-		<div class="modal-content">
-		<div class="modal-header">
-			<h5 class="modal-title" id="modalFormLabel">Form {{ $title }}</h5>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		</div>
-		<div class="modal-body">
-			<form>
-			<div class="mb-3">
-				<label for="recipient-name" class="col-form-label">Recipient:</label>
-				<input type="text" class="form-control" id="recipient-name">
+	<form id="form">
+		<div class="modal fade" id="modalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalFormLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalFormLabel">Form {{ $title }}</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+						<input type="hidden" name="id" id="id" />
+						<div class="mb-3">
+							<label for="id_role" class="col-form-label">Role:</label>
+							<select class="form-control"  name="id_role" id="id_role" required></select>
+						</div>
+						<div class="mb-3">
+							<label for="name" class="col-form-label">Nama:</label>
+							<input type="text" name="name" class="form-control" id="name" required />
+						</div>
+						<div class="mb-3">
+							<label for="email" class="col-form-label">Email:</label>
+							<input type="email" name="email" class="form-control" id="email" required />
+						</div>
+						<div class="mb-3">
+							<label for="password" class="col-form-label">Kata Sandi:</label>
+							<input type="password" name="password" class="form-control" id="password" />
+						</div>
+						<br>
+						<div class="form-check mb-3">
+							<input class="form-check-input" type="checkbox" value="1" id="change-password">
+							<label class="form-check-label" for="change-password">
+							  Centang untuk ubah!
+							</label>
+						</div>
+						<div class="mb-3">
+							<label for="mobile_no" class="col-form-label">No Hp:</label>
+							<input type="number" name="mobile_no" class="form-control" id="mobile_no" />
+						</div>
+						<div class="mb-3">
+							<label for="address" class="col-form-label">Alamat:</label>
+							<textarea class="form-control" name="address" id="address"></textarea>
+						</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+					<button type="sumit" class="btn btn-primary">Submit</button>
+				</div>
+				</div>
 			</div>
-			<div class="mb-3">
-				<label for="message-text" class="col-form-label">Message:</label>
-				<textarea class="form-control" id="message-text"></textarea>
-			</div>
-			</form>
 		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-			<button type="button" class="btn btn-primary">Submit</button>
-		</div>
-		</div>
-	</div>
-	</div>
+	</form>
 
     <script>
-		$.fn.dataTable.ext.errMode = 'throw';
-		var oTable;
+		var action;
         $(document).ready(function() {
 			oTable = $('#datatable_sipayu').DataTable( {
 				'ajax': {
@@ -176,6 +200,16 @@
 					{ "data": "users_latitude" },
 					{ "data": "users_longitude"  },
 					{ "data": "users_created_at" },
+					{ 
+						"data": null,
+						"render": function(row) {
+							let html = `
+								<a href="javascript:void(0)" class="btn btn-sm btn-info edit" data-id="${row.id}">Ubah</a>
+								<a href="javascript:void(0)" class="btn btn-sm btn-danger delete" data-id="${row.id}">Hapus</a>
+							`;
+							return html;
+						}
+					},
 				]
 			} );
         });
@@ -183,8 +217,192 @@
 			oTable.search($(this).val()).draw() ;
 		});
 		$(document).on("click", ".sipayu_modal", function() {
+			action = "add";
+			getRoles();
 			$("#modalForm").modal("show");
-		})
+		});
+		$(document).on("click", ".edit", function() {
+			action = "edit";
+			let id = $(this).attr("data-id");
+			$("#id").val(id);
+			getUser(id);
+			$("#modalForm").modal("show");
+		});
+		$(document).on("click", ".delete", async function() {
+			let id = $(this).attr("data-id");
+			$("#id").val(id);
+			await deleteData(id);
+		});
+		$(document).on("submit", "#form", async function(e) {
+			e.preventDefault();
+			await submitData();
+			setTimeout(async () => {
+				await $('form').trigger("reset");
+			}, 1000);
+			$("#modalForm").modal("hide");
+		});
+
+		async function getRoles(id_role="") {
+			let headersList = {
+				"Accept": "*/*",
+				"Authorization": `Bearer ${apiKey}` 
+			}
+			
+			let reqOptions = {
+				url: `${baseUrlApi}/api/roles/`,
+				method: "GET",
+				headers: headersList,
+			}
+			
+			let response = await axios.request(reqOptions);
+			let data = response.data.data;
+			let dom = ``;
+			dom += `<option selected>Pilih</option>`;
+			for (let i = 0; i < data.length; i++) {
+				const element = data[i];
+				dom += `<option value="${element.id}" ${id_role!=""?'selected':''}>${element.name}</option>`;
+			}
+			$("#id_role").html(dom);
+		}
+
+		async function getUser(id) {
+			let config = {
+			  method: 'get',
+			  maxBodyLength: Infinity,
+			  url: `${baseUrlApi}/api/users/${id}`,
+			  headers: { 
+				"Authorization": `Bearer ${apiKey}`
+			  }
+			};
+			
+			await axios.request(config)
+			.then((response) => {
+			  console.log(JSON.stringify(response.data));
+			  let data = response.data.data;
+			  $("#name").val(data.name);
+			  $("#id_role").val(data.id_role).trigger("change");
+			  getRoles(data.id_role);
+			  $("#email").val(data.email);
+			  $("#address").val(data.address);
+			  $("#mobile_no").val(data.mobile_no);
+			  $("#latitude").val(data.latitude);
+			  $("#longitude").val(data.longitude);
+			})
+			.catch((error) => {
+			  console.log(error);
+			  swalFailed();
+			});
+
+		}
+
+		async function deleteData(id) {
+			swalWithBootstrapButtons.fire({
+				title: "Apakah yakin?",
+				text: "Tidak akan dapat dikembalikan!",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Ya, hapus!",
+				cancelButtonText: "Tidak, batal!",
+				reverseButtons: true
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					await execute(id);
+					await swalWithBootstrapButtons.fire({
+						title: "Terhapus!",
+						text: "Data Anda telah dihapus.",
+						icon: "success"
+					});
+					setTimeout(async () => {
+						await oTable.ajax.reload( null, false );
+					}, 1000);
+				} else if (
+					result.dismiss === Swal.DismissReason.cancel
+				) {
+					await swalWithBootstrapButtons.fire({
+						title: "Dibatalkan",
+						text: "Data Anda aman!",
+						icon: "error"
+					});
+				}
+			});
+
+			let execute = async (id) => {
+				let config = {
+				  method: 'delete',
+				  maxBodyLength: Infinity,
+				  url: `${baseUrlApi}/api/users/delete/${id}`,
+				  headers: { 
+					"Authorization": `Bearer ${apiKey}` 
+				  }
+				};
+				
+				await axios.request(config)
+				.then((response) => {
+				  console.log(JSON.stringify(response.data));
+					Swal.fire({
+						text: "Berhasil!",
+						icon: "success",
+						buttonsStyling: false,
+						confirmButtonText: "Ok, mengerti!",
+						customClass: {
+							confirmButton: "btn btn-primary"
+						}
+					});
+				})
+				.catch((error) => {
+				  console.log(error);
+				  	swalFailed();
+				});
+			}
+				
+
+		}
+
+		async function submitData() {
+			let data = {
+			  "name": $("#name").val(),
+			  "id_role": $("#id_role").val(),
+			  "email": $("#email").val(),
+			  "password": $("#password").val(),
+			  "address": $("#address").val(),
+			  "mobile_no": $("#mobile_no").val(),
+			  "latitude": $("#latitude").val(),
+			  "longitude": $("#longitude").val(),
+			};
+			if ($("#change-password").is(":checked")) {
+				data.password = $("#password").val();
+			}
+			data = JSON.stringify(data);
+			let isUrl = action == "add" ? `${baseUrlApi}/api/users/create` : `${baseUrlApi}/api/users/update/${$("#id").val()}`;
+			let config = {
+			  method: 'post',
+			  maxBodyLength: Infinity,
+			  url: isUrl,
+			  headers: { 
+				'Content-Type': 'application/json', 
+				"Authorization": `Bearer ${apiKey}`
+			  },
+			  data : data
+			};
+			
+			await axios.request(config)
+			.then(async (response) => {
+			  console.log(JSON.stringify(response.data));
+				await swalWithBootstrapButtons.fire({
+					title: "Berhasil!",
+					text: "Data Anda telah disubmit.",
+					icon: "success"
+				});
+				setTimeout(async () => {
+					await oTable.ajax.reload( null, false );
+				}, 1000);
+			})
+			.catch((error) => {
+			  console.log(error);
+				swalFailed();
+			});
+		}
+
     </script>
 
 	@include('layouts.scrolltop')

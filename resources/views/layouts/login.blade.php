@@ -10,9 +10,9 @@
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:type" content="article" />
 		<meta property="og:title" content="SIPAYU" />
-		<meta property="og:url" content="https://keenthemes.com/products/saul-html-pro" />
+		<meta property="og:url" content="https://sipayu.indramayukab.go.id" />
 		<meta property="og:site_name" content="SIPAYU" />
-		<link rel="canonical" href="https://preview.keenthemes.com/saul-html-free" />
+		<link rel="canonical" href="https://sipayu.indramayukab.go.id" />
 		<link rel="shortcut icon" href="{{ url('images/sipayu-ori-logo.png') }}" />
 		<!--begin::Fonts(mandatory for all pages)-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
