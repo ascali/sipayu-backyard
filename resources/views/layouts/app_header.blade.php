@@ -30,7 +30,7 @@
             <div class="app-navbar flex-grow-1 justify-content-end" id="kt_app_header_navbar">
                 <div class="app-navbar-item d-flex align-items-stretch flex-lg-grow-1 me-2 me-lg-0">
                     <!--begin::Search-->
-                    <div id="kt_header_search" class="header-search d-flex align-items-center w-lg-350px" data-kt-search-keypress="true" data-kt-search-min-length="2" data-kt-search-enter="enter" data-kt-search-layout="menu" data-kt-search-responsive="true" data-kt-menu-trigger="auto" data-kt-menu-permanent="true" data-kt-menu-placement="bottom-start">
+                    <div id="kt_header_search" class="header-search d-flex align-items-center w-lg-350px d-none" data-kt-search-keypress="true" data-kt-search-min-length="2" data-kt-search-enter="enter" data-kt-search-layout="menu" data-kt-search-responsive="true" data-kt-menu-trigger="auto" data-kt-menu-permanent="true" data-kt-menu-placement="bottom-start">
                         <!--begin::Tablet and mobile search toggle-->
                         <div data-kt-search-element="toggle" class="search-toggle-mobile d-flex d-lg-none align-items-center">
                             <div class="d-flex">
@@ -212,7 +212,7 @@
                 </div>
                 <!--end::Action-->
                 <!--begin::Header menu toggle-->
-                <div class="app-navbar-item ms-3 ms-lg-4 ms-n2 me-3 d-flex d-lg-none">
+                <div class="app-navbar-item ms-3 ms-lg-4 ms-n2 me-3 d-flex d-lg-none d-none">
                     <div class="btn btn-icon btn-custom btn-color-gray-600 btn-active-color-primary w-35px h-35px w-md-40px h-md-40px" id="kt_app_aside_mobile_toggle">
                         <i class="ki-duotone ki-burger-menu-2 fs-2">
                             <span class="path1"></span>

@@ -154,7 +154,7 @@
 						<div class="form-check mb-3">
 							<input class="form-check-input" type="checkbox" value="1" id="change-password">
 							<label class="form-check-label" for="change-password">
-							  Centang untuk ubah!
+							  Centang untuk ubah kata sandi!
 							</label>
 						</div>
 						<div class="mb-3">
