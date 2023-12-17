@@ -1,1 +1,1 @@
-<meta http-equiv="refresh" content="0;url=https://sipayu.indramayukab.go.id/backyard/public">
+<!-- <meta http-equiv="refresh" content="0;url=https://sipayu.indramayukab.go.id/backyard/public"> -->

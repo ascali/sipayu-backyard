@@ -223,17 +223,17 @@
 		$(document).on("keyup", ".search-input", function() {
 			oTable.search($(this).val()).draw() ;
 		});
-		$(document).on("click", ".sipayu_modal", function() {
+		$(document).on("click", ".sipayu_modal", async function() {
 			action = "add";
-			getToI("");
+			await getToI("");
 			$("#ads-img-thumbnail").attr("src", "");
 			$("#modalForm").modal("show");
 		});
-		$(document).on("click", ".edit", function() {
+		$(document).on("click", ".edit", async function() {
 			action = "edit";
 			let id = $(this).attr("data-id");
 			$("#id").val(id);
-			getData(id);
+			await getData(id);
 			$("#modalForm").modal("show");
 		});
 		$(document).on("click", ".delete", async function() {
@@ -248,12 +248,11 @@
 
 		async function getToI(id_toi="") {
 			let headersList = {
-				"Accept": "*/*",
 				"Authorization": `Bearer ${apiKey}` 
 			}
 			
 			let reqOptions = {
-				url: `${baseUrlApi}/api/type_of_interest/`,
+				url: `${baseUrlApi}/api/type_of_interest/list`,
 				method: "GET",
 				headers: headersList,
 			}
@@ -280,11 +279,11 @@
 			};
 			
 			await axios.request(config)
-			.then((response) => {
+			.then(async (response) => {
 			  console.log(JSON.stringify(response.data));
 			  let data = response.data.data;
 			  $("#name").val(data.name);
-			  getToI(data.id_toi);
+			  await getToI(data.id_toi);
 			  $("#id_toi").val(data.id_toi).trigger("change");
 			  $("#contact").val(data.contact);
 			  $("#imageBase64").val(data.image);

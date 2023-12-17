@@ -216,9 +216,9 @@
 		$('.search-input').keyup(function(){
 			oTable.search($(this).val()).draw() ;
 		});
-		$(document).on("click", ".sipayu_modal", function() {
+		$(document).on("click", ".sipayu_modal", async function() {
 			action = "add";
-			getRoles();
+			await getRoles();
 			$("#modalForm").modal("show");
 		});
 		$(document).on("click", ".edit", function() {
@@ -244,7 +244,6 @@
 
 		async function getRoles(id_role="") {
 			let headersList = {
-				"Accept": "*/*",
 				"Authorization": `Bearer ${apiKey}` 
 			}
 			
@@ -276,12 +275,12 @@
 			};
 			
 			await axios.request(config)
-			.then((response) => {
+			.then(async (response) => {
 			  console.log(JSON.stringify(response.data));
 			  let data = response.data.data;
 			  $("#name").val(data.name);
 			  $("#id_role").val(data.id_role).trigger("change");
-			  getRoles(data.id_role);
+			  await getRoles(data.id_role);
 			  $("#email").val(data.email);
 			  $("#address").val(data.address);
 			  $("#mobile_no").val(data.mobile_no);
