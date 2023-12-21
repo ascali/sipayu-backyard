@@ -82,6 +82,7 @@
                                                         <thead>
                                                             <tr class="fw-semibold fs-6 text-muted">
                                                                 <th>Nama</th>
+                                                                <th>Foto</th>
                                                                 <th>Role</th>
                                                                 <th>Email</th>
                                                                 <th>No HP</th>
@@ -165,6 +166,12 @@
 							<label for="address" class="col-form-label">Alamat:</label>
 							<textarea class="form-control" name="address" id="address"></textarea>
 						</div>
+						<div class="mb-3">
+						  <label for="image" class="form-label">Gambar Iklan</label>
+						  <input class="form-control form-control-sm" id="file" accept=".jpg, .png, .jpeg" type="file" onchange="preview_image()" />
+						  <input type="hidden" name="image" id="imageBase64" />
+						</div>
+						<div class="mb-3"><img id="ads-img-thumbnail" src="" class="img-thumbnail mx-auto d-block" alt="..."></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -193,6 +200,7 @@
 				"retrieve": true,
 				"columns": [
 					{ "data": "users_name" },
+					{ "data": null, "render": (row) => `<img src="${row.users_image}" class="rounded mx-auto d-block" alt="" style="width: 100px;" />` },
 					{ "data": "roles_name" },
 					{ "data": "users_email"  },
 					{ "data": "users_mobile_no" },
@@ -286,6 +294,8 @@
 			  $("#mobile_no").val(data.mobile_no);
 			  $("#latitude").val(data.latitude);
 			  $("#longitude").val(data.longitude);
+			  $("#imageBase64").val(data.image);
+			  $("#ads-img-thumbnail").attr("src", data.image);
 			})
 			.catch((error) => {
 			  console.log(error);
@@ -359,14 +369,15 @@
 
 		async function submitData() {
 			let data = {
-			  "name": $("#name").val(),
-			  "id_role": $("#id_role").val(),
-			  "email": $("#email").val(),
-			  "password": $("#password").val(),
-			  "address": $("#address").val(),
-			  "mobile_no": $("#mobile_no").val(),
-			  "latitude": $("#latitude").val(),
-			  "longitude": $("#longitude").val(),
+				"name": $("#name").val(),
+				"image": $("#imageBase64").val(),
+				"id_role": $("#id_role").val(),
+				"email": $("#email").val(),
+				"password": $("#password").val(),
+				"address": $("#address").val(),
+				"mobile_no": $("#mobile_no").val(),
+				"latitude": $("#latitude").val(),
+				"longitude": $("#longitude").val(),
 			};
 			if ($("#change-password").is(":checked")) {
 				data.password = $("#password").val();
@@ -402,6 +413,100 @@
 			});
 		}
 
+
+		function readFile() {
+			if (!this.files || !this.files[0]) return;
+			const FR = new FileReader();
+			FR.addEventListener("load", function(evt) {
+				document.querySelector("#ads-img-thumbnail").src = evt.target.result;
+				document.querySelector("#imageBase64").value	 = evt.target.result;
+			}); 
+			FR.readAsDataURL(this.files[0]);
+		}
+		// document.querySelector("#file").addEventListener("change", readFile);
+
+		async function preview_image() {
+			const file = document.getElementById('file');
+			const image = await process_image(file.files[0]);
+			document.querySelector("#ads-img-thumbnail").src = image;
+			document.querySelector("#imageBase64").value	 = image;
+			// console.log(image)
+		}
+
+		async function reduce_image_file_size(base64Str, MAX_WIDTH = 450, MAX_HEIGHT = 450) {
+			let resized_base64 = await new Promise((resolve) => {
+				let img = new Image()
+				img.src = base64Str
+				img.onload = () => {
+					let canvas = document.createElement('canvas')
+					let width = img.width
+					let height = img.height
+		
+					if (width > height) {
+						if (width > MAX_WIDTH) {
+							height *= MAX_WIDTH / width
+							width = MAX_WIDTH
+						}
+					} else {
+						if (height > MAX_HEIGHT) {
+							width *= MAX_HEIGHT / height
+							height = MAX_HEIGHT
+						}
+					}
+					canvas.width = width
+					canvas.height = height
+					let ctx = canvas.getContext('2d')
+					ctx.drawImage(img, 0, 0, width, height)
+					resolve(canvas.toDataURL()) // this will return base64 image results after resize
+				}
+			});
+			return resized_base64;
+		}
+		
+		async function image_to_base64(file) {
+			let result_base64 = await new Promise((resolve) => {
+				let fileReader = new FileReader();
+				fileReader.onload = (e) => resolve(fileReader.result);
+				fileReader.onerror = (error) => {
+					console.log(error)
+					alert('An Error occurred please try again, File might be corrupt');
+				};
+				fileReader.readAsDataURL(file);
+			});
+			return result_base64;
+		}
+		
+		async function process_image(file, min_image_size = 300) {
+			const res = await image_to_base64(file);
+			let dataBase64 = "";
+			if (res) {
+				const old_size = calc_image_size(res);
+				if (old_size > min_image_size) {
+					const resized = await reduce_image_file_size(res);
+					const new_size = calc_image_size(resized)
+					console.log('new_size=> ', new_size, 'KB');
+					console.log('old_size=> ', old_size, 'KB');
+					dataBase64 = resized;
+				} else {
+					console.log('image already small enough')
+					dataBase64 = res;
+				}
+		
+			} else {
+				console.log('return err')
+				dataBase64 = '';
+			}
+			return dataBase64;
+		}
+		
+		function calc_image_size(image) {
+			let y = 1;
+			if (image.endsWith('==')) {
+				y = 2
+			}
+			const x_size = (image.length * (3 / 4)) - y
+			return Math.round(x_size / 1024)
+		}
     </script>
 
 	@include('layouts.scrolltop')
