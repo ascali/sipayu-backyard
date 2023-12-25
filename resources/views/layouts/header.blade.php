@@ -34,7 +34,7 @@
 		<!--begin::Javascript-->
 		<script>var hostUrl = "{{ url('public/assets') }}";</script>
 		<script>var baseUrl = "{{ url('') }}";</script>
-		<script>var baseUrlApi = window.location.hostname == '0.0.0.0' ? `http://0.0.0.0:8000/public` : `https://be-sipayu.indramayukab.go.id/public`;</script>
+		<script>var baseUrlApi = window.location.hostname != 'sipayu.indramayukab.go.id' ? `http://${window.location.hostname}:8000/public` : `https://be-sipayu.indramayukab.go.id/public`;</script>
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
 		<script src="{{ url('assets/plugins/global/plugins.bundle.js') }}"></script>
 		<script src="{{ url('assets/js/scripts.bundle.js') }}"></script>

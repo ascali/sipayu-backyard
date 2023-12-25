@@ -144,7 +144,7 @@
 		<script src="{{ url('assets/js/scripts.bundle.js') }}"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Custom Javascript(used for this page only)-->
-		<script>var baseUrlApi = window.location.hostname == '0.0.0.0' ? `http://0.0.0.0:8000/public` : `https://be-sipayu.indramayukab.go.id/public`;</script>
+		<script>var baseUrlApi = window.location.hostname != 'sipayu.indramayukab.go.id' ? `http://${window.location.hostname}:8000/public` : `https://be-sipayu.indramayukab.go.id/public`;</script>
 		<script src="{{ url('assets/js/custom/authentication/sign-in/general.js') }}"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->

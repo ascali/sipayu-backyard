@@ -81,13 +81,21 @@
                                                     <table id="datatable_sipayu" class="table table-row-bordered gy-5">
                                                         <thead>
                                                             <tr class="fw-semibold fs-6 text-muted">
-                                                                <th>name</th>
-                                                                <th>type</th>
-                                                                <th>image</th>
+                                                                <th>judul</th>
+                                                                <th>tipe</th>
+                                                                <th>gambar</th>
                                                                 <th>url</th>
-                                                                <th>description</th>
+                                                                <th>deskripsi</th>
                                                                 <th>efective</th>
                                                                 <th>expired</th>
+																<th>status</th>
+																<!-- <th>jenis</th> -->
+																<th>harga</th>
+																<th>nama pengiklan</th>
+																<th>email pengiklan</th>
+																<th>telp pengiklan</th>
+																<!-- <th>impresi</th> -->
+																<!-- <th>klik</th> -->
                                                                 <!-- <th>latitude</th> -->
 																<!-- <th>longitude</th> -->
 																<th>Dibuat</th>
@@ -152,6 +160,21 @@
 							</div>
 						</div>
 						<div class="mb-3">
+							<label for="status" class="col-form-label">Status:</label>
+							<div class="form-check mb-3">
+								<input class="form-check-input" type="radio" name="status" value="1" id="type-status" checked />
+								<label class="form-check-label" for="type-status">
+								  Aktif
+								</label>
+							  </div>
+							  <div class="form-check mb-3">
+								<input class="form-check-input" type="radio" name="status" value="0" id="type-status" />
+								<label class="form-check-label" for="type-status">
+								  Tidak Aktif
+								</label>
+							</div>
+						</div>
+						<div class="mb-3">
 							<label for="name" class="col-form-label">Nama:</label>
 							<input type="text" name="name" class="form-control" id="name" required />
 						</div>
@@ -171,6 +194,22 @@
 						<div class="mb-3">
 							<label for="description" class="col-form-label">Description:</label>
 							<textarea class="form-control" name="description" id="description"></textarea>
+						</div>
+						<div class="mb-3">
+							<label for="price_ads" class="col-form-label">Harga:</label>
+							<input type="number" name="price_ads" class="form-control" id="price_ads" required />
+						</div>
+						<div class="mb-3">
+							<label for="name_advertiser" class="col-form-label">Nama Pengiklan:</label>
+							<input type="text" name="name_advertiser" class="form-control" id="name_advertiser" required />
+						</div>
+						<div class="mb-3">
+							<label for="email_advertiser" class="col-form-label">Email Pengiklan:</label>
+							<input type="text" name="email_advertiser" class="form-control" id="email_advertiser" />
+						</div>
+						<div class="mb-3">
+							<label for="telp_advertiser" class="col-form-label">Telp Pengiklan:</label>
+							<input type="text" name="telp_advertiser" class="form-control" id="telp_advertiser" />
 						</div>
 						<div class="mb-3 d-none">
 							<label for="latitude" class="col-form-label">Latitude:</label>
@@ -222,6 +261,14 @@
 					{ "data": "expired"  },
 					// { "data": "latitude"  },
 					// { "data": "longitude"  },
+					{ "data": "status" },
+					// { "data": "type_ads" },
+					{ "data": "price_ads" },
+					{ "data": "name_advertiser" },
+					{ "data": "email_advertiser" },
+					{ "data": "telp_advertiser" },
+					// { "data": "impression" },
+					// { "data": "clicked" },
 					{ "data": "created_at" },
 					{ 
 						"data": null,
@@ -297,6 +344,12 @@
 			  $("#expired").val(moment(data.expired).format("YYYY-MM-DD"));
 			  $("#latitude").val(data.latitude);
 			  $("#longitude").val(data.longitude);
+			  $("#status").val(data.status);
+			//   $("#type_ads").val(data.type_ads);
+			  $("#price_ads").val(data.price_ads);
+			  $("#name_advertiser").val(data.name_advertiser);
+			  $("#email_advertiser").val(data.email_advertiser);
+			  $("#telp_advertiser").val(data.telp_advertiser);
 			})
 			.catch((error) => {
 			  console.log(error);
@@ -380,6 +433,12 @@
 				  "expired": $("#expired").val(),
 				  "latitude": $("#latitude").val(),
 				  "longitude": $("#longitude").val(),
+				  "status": $('input[name="status"]:checked').val(),
+				  "type_ads": 'Picture',
+				  "price_ads": $("#price_ads").val(),
+				  "name_advertiser": $("#name_advertiser").val(),
+				  "email_advertiser": $("#email_advertiser").val(),
+				  "telp_advertiser": $("#telp_advertiser").val(),
 				};
 				data = JSON.stringify(data);
 				let isUrl = action == "add" ? `${baseUrlApi}/api/ads/create` : `${baseUrlApi}/api/ads/update/${$("#id").val()}`;
