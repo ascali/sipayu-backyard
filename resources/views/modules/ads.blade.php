@@ -254,14 +254,14 @@
 				"columns": [
 					{ "data": "name" },
 					{ "data": "type" },
-					{ "data": null, "render": (row) => `<img src="${row.image}" class="rounded mx-auto d-block" alt="" style="width: 100px;" />` },
+					{ "data": null, "render": (row) => `<img src="${urlImage}/${row.image}" class="rounded mx-auto d-block" alt="" style="width: 100px;" />` },
 					{ "data": "url"},
 					{ "data": "description"  },
 					{ "data": "efective" },
 					{ "data": "expired"  },
 					// { "data": "latitude"  },
 					// { "data": "longitude"  },
-					{ "data": "status" },
+					{ "data": null, "render": (row) => row.status == false ? 'Tidak Aktif' : 'Aktif' },
 					// { "data": "type_ads" },
 					{ "data": "price_ads" },
 					{ "data": "name_advertiser" },
@@ -337,7 +337,7 @@
 			  $("#name").val(data.name);
 			  $("#type").val(data.type);
 			  $("#imageBase64").val(data.image);
-			  $("#ads-img-thumbnail").attr("src", data.image);
+			  $("#ads-img-thumbnail").attr("src", `${urlImage}/${data.image}`);
 			  $("#url").val(data.url);
 			  $("#description").val(data.description);
 			  $("#efective").val(moment(data.efective).format("YYYY-MM-DD"));

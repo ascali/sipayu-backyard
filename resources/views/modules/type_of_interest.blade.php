@@ -172,7 +172,7 @@
 				"retrieve": true,
 				"columns": [
 					{ "data": "name" },
-					{ "data": null, "render": (row) => `<img src="${row.image}" class="rounded mx-auto d-block" alt="" style="width: 100px;" />` },
+					{ "data": null, "render": (row) => `<img src="${urlImage}/${row.image}" class="rounded mx-auto d-block" alt="" style="width: 100px;" />` },
 					{ "data": "description"  },
 					{ "data": "created_at" },
 					{ 
@@ -230,7 +230,7 @@
 			  let data = response.data.data;
 			  $("#name").val(data.name);
 			  $("#imageBase64").val(data.image);
-			  $("#ads-img-thumbnail").attr("src", data.image);
+			  $("#ads-img-thumbnail").attr("src", `${urlImage}/${data.image}`);
 			  $("#description").val(data.description);
 			})
 			.catch((error) => {

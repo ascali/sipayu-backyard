@@ -193,7 +193,7 @@
 				"retrieve": true,
 				"columns": [
 					{ "data": "name" },
-					{ "data": null, "render": (row) => `<img src="${row.image}" class="rounded mx-auto d-block" alt="" style="width: 100px;" />` },
+					{ "data": null, "render": (row) => `<img src="${urlImage}/${row.image}" class="rounded mx-auto d-block" alt="" style="width: 100px;" />` },
 					{ "data": "date_event"  },
 					{ "data": "description" },
 					{ "data": "location"  },
@@ -255,7 +255,7 @@
 			  $("#name").val(data.name);
 			  $("#date_event").val(data.date_event);
 			  $("#imageBase64").val(data.image);
-			  $("#ads-img-thumbnail").attr("src", data.image);
+			  $("#ads-img-thumbnail").attr("src", `${urlImage}/${data.image}`);
 			  $("#location").val(data.location);
 			  $("#description").val(data.description);
 			  $("#latitude").val(data.latitude);

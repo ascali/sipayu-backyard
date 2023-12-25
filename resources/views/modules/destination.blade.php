@@ -200,7 +200,7 @@
 				"columns": [
 					{ "data": "name" },
 					{ "data": "type_of_interests_name" },
-					{ "data": null, "render": (row) => `<img src="${row.image}" class="rounded mx-auto d-block" alt="" style="width: 100px;" />` },
+					{ "data": null, "render": (row) => `<img src="${urlImage}/${row.image}" class="rounded mx-auto d-block" alt="" style="width: 100px;" />` },
 					{ "data": "contact"  },
 					{ "data": "description" },
 					{ "data": "location"  },
@@ -287,7 +287,7 @@
 			  $("#id_toi").val(data.id_toi).trigger("change");
 			  $("#contact").val(data.contact);
 			  $("#imageBase64").val(data.image);
-			  $("#ads-img-thumbnail").attr("src", data.image);
+			  $("#ads-img-thumbnail").attr("src", `${urlImage}/${data.image}`);
 			  $("#location").val(data.location);
 			  $("#description").val(data.description);
 			  $("#latitude").val(data.latitude);

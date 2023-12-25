@@ -192,7 +192,7 @@
 				"retrieve": true,
 				"columns": [
 					{ "data": "name" },
-					{ "data": null, "render": (row) => `<img src="${row.image}" class="rounded mx-auto d-block" alt="" style="width: 100px;" />` },
+					{ "data": null, "render": (row) => `<img src="${urlImage}/${row.image}" class="rounded mx-auto d-block" alt="" style="width: 100px;" />` },
 					{ "data": "description"  },
 					{ "data": "efective" },
 					{ "data": "expired"  },
@@ -254,7 +254,7 @@
 			  let data = response.data.data;
 			  $("#name").val(data.name);
 			  $("#imageBase64").val(data.image);
-			  $("#ads-img-thumbnail").attr("src", data.image);
+			  $("#ads-img-thumbnail").attr("src", `${urlImage}/${data.image}`);
 			  $("#description").val(data.description);
 			  $("#efective").val(moment(data.efective).format("YYYY-MM-DD"));
 			  $("#expired").val(moment(data.expired).format("YYYY-MM-DD"));

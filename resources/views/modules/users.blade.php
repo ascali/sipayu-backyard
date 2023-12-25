@@ -200,7 +200,7 @@
 				"retrieve": true,
 				"columns": [
 					{ "data": "users_name" },
-					{ "data": null, "render": (row) => `<img src="${row.users_image}" class="rounded mx-auto d-block" alt="" style="width: 100px;" />` },
+					{ "data": null, "render": (row) => `<img src="${urlImage}/${row.users_image}" class="rounded mx-auto d-block" alt="" style="width: 100px;" />` },
 					{ "data": "roles_name" },
 					{ "data": "users_email"  },
 					{ "data": "users_mobile_no" },
@@ -295,7 +295,7 @@
 			  $("#latitude").val(data.latitude);
 			  $("#longitude").val(data.longitude);
 			  $("#imageBase64").val(data.image);
-			  $("#ads-img-thumbnail").attr("src", data.image);
+			  $("#ads-img-thumbnail").attr("src", `${urlImage}/${data.image}`);
 			})
 			.catch((error) => {
 			  console.log(error);
