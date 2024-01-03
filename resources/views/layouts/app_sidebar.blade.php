@@ -71,6 +71,14 @@
                         <span class="menu-title">Event</span>
                     </a>
                 </div>
+                <div class="menu-item">
+                    <a href="{{ url('term_and_conditions') }}" class="menu-link">
+                        <span class="menu-icon">
+                            <i class="fa-solid fa-book fs-1"></i>
+                        </span>
+                        <span class="menu-title">Term & Conditions</span>
+                    </a>
+                </div>
                 <!-- <div class="menu-item">
                     <a href="{{ url('review') }}" class="menu-link">
                         <span class="menu-icon">
@@ -92,8 +100,7 @@
                 </div> -->
                 <!-- end::custom -->
                 <!--begin:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                    <!--begin:Menu link-->
+                <!-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <span class="menu-link">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-rescue fs-1">
@@ -104,24 +111,17 @@
                         <span class="menu-title">Help</span>
                         <span class="menu-arrow"></span>
                     </span>
-                    <!--end:Menu link-->
-                    <!--begin:Menu sub-->
                     <div class="menu-sub menu-sub-accordion">
-                        <!--begin:Menu item-->
                         <div class="menu-item">
-                            <!--begin:Menu link-->
                             <a class="menu-link" href="https://preview.keenthemes.com/html/saul-html-pro/docs/getting-started/changelog" target="_blank">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">Changelog v1.0.0</span>
                             </a>
-                            <!--end:Menu link-->
                         </div>
-                        <!--end:Menu item-->
                     </div>
-                    <!--end:Menu sub-->
-                </div>
+                </div> -->
                 <!--end:Menu item-->
             </div>
             <!--end::Sidebar menu-->

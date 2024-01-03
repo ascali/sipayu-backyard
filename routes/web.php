@@ -92,3 +92,9 @@ $router->group(['prefix' => 'history'], function () use ($router) {
         return view('modules.history', ["title" => "History"]);
     });
 });
+
+$router->group(['prefix' => 'term_and_conditions'], function () use ($router) {
+    $router->get('/', function () use ($router) {
+        return view('modules.term_and_conditions', ["title" => "Term & Conditions"]);
+    });
+});
